@@ -1,5 +1,5 @@
 pip >= 7.0.0
-IPython >= 1.2.1
+IPython == 4.0.0
 PyYAML >= 3.10
 XlsxWriter >= 0.9.3
 artifacts >= 20170818

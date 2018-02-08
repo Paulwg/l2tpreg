@@ -223,7 +223,7 @@ class PregMagics(magic.Magics):
     for key in current_key.GetSubkeys():
       # TODO: move this construction into a separate function in OutputWriter.
       time_string = timelib.Timestamp.CopyToIsoFormat(
-          key.last_written_time)
+          key.last_written_time.GetPlasoTimestamp())
       time_string, _, _ = time_string.partition('.')
 
       sub.append(('{0:>19s} {1:>15s}  {2:s}'.format(
@@ -668,7 +668,7 @@ class PregConsole(object):
       # No Registry type specified use all available types instead.
       registry_file_types = self.preg_tool.GetRegistryTypes()
 
-    registry_helpers = self.preg_tool.GetRegistryHelpers(
+    registry_helpers = self.preg_tool._GetRegistryHelpers(
         self.preg_tool.artifacts_registry,
         plugin_names=self.preg_tool.plugin_names,
         registry_file_types=registry_file_types)

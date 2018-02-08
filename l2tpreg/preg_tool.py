@@ -32,7 +32,7 @@ from plaso.parsers import mediator as parsers_mediator
 from plaso.parsers import winreg_plugins  # pylint: disable=unused-import
 from plaso.preprocessors import manager as preprocess_manager
 # TODO: refactor usage of fake storage.
-from plaso.storage import fake_storage
+from plaso.storage.fake import writer as fake_storage
 
 from l2tpreg import definitions
 from l2tpreg import helper
@@ -1011,7 +1011,7 @@ class PregTool(storage_media_tool.StorageMediaTool):
     Returns:
       bool: True if the arguments were successfully parsed.
     """
-    self._ConfigureLogging()
+    #self._ConfigureLogging()
 
     argument_parser = argparse.ArgumentParser(
         description=self.DESCRIPTION, epilog=self.EPILOG, add_help=False,
@@ -1194,7 +1194,7 @@ class PregTool(storage_media_tool.StorageMediaTool):
 
     self.registry_file = registry_file
 
-    scan_context = self.ScanSource()
+    scan_context = self.ScanSource(self.registry_file)
     self.source_type = scan_context.source_type
 
   def PrintHeader(self, text, character='*'):
